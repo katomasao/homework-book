@@ -6,12 +6,12 @@ package dev.somalley.book;
 public class Book {
     String title;
     int releaseYear;
-    String author;
+    Author author;
     int pages;
 
     public Book(String title,
             int releaseYear,
-            String author,
+            Author author,
             int pages) {
         this.title = title;
         this.releaseYear = releaseYear;
@@ -29,18 +29,15 @@ public class Book {
         return this.pages >= BIG_PAGES;
     }
 
-    /**
-     * method checks if <i>word</i> appears in either <i>title</i>
-     * or <i>author</i>
-     * @param word the word or expression to be searched for. note that
-     * it shouldn't contain dollar sign as it is used as a separator.
-     * */
     public boolean matches(String word) {
-        return (this.title + "$" + this.author).contains(word);
+        return this.title.contains(word) || this.author.matches(word);
     }
 
     public int estimatePrice() {
-        return Math.max(this.pages * PRICE_PER_PAGE, PRICE_FLOOR);
+        return Math.max(
+                (int)(this.pages * PRICE_PER_PAGE *
+                Math.sqrt(this.author.getRating())),
+                PRICE_FLOOR);
     }
 
 }

@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Main {
-    static Book philo = new Book("Phänomenologie des Geistes", 1807, "Georg Wilhelm Friedrich Hegel", 701);
+    static Author hegel = new Author("Georg", "Hegel", 10);
+    static Book philo = new Book("Phänomenologie des Geistes", 1807, hegel, 701);
     @Test void philoIsBig() {
         assertTrue(philo.isBig(), "Phenomenology of spirit has >700 pages and should be considered big");
     }
